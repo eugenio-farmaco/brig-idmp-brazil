@@ -1,0 +1,127 @@
+# BRIG - Brazilian Implementation Guide for IDMP
+# sushi-config.yaml v0.0.1
+# Configuração SUSHI para compilação FSH → FHIR
+
+# Informações básicas do Implementation Guide
+id: brig.idmp.brazil
+canonical: http://farmaco.maxapex.net/brig/fhir
+name: BRIGIDMPBrazil
+title: "BRIG - Brazilian Implementation Guide for IDMP"
+description: >-
+  Implementation Guide brasileiro para Identificação de Produtos Medicinais (IDMP) 
+  usando padrões FHIR R5, desenvolvido para harmonização de dados farmacêuticos 
+  no contexto regulatório da ANVISA.
+status: draft
+version: 0.0.1
+fhirVersion: 5.0.0
+
+# Informações de autoria e contato
+copyrightYear: 2025
+releaseLabel: "Protótipo"
+publisher:
+  name: Eugênio Neves
+  url: https://farmaco.maxapex.net
+  email: eugenio@farmaco.io
+
+contact:
+  - name: Eugênio Neves
+    telecom:
+      - system: email
+        value: eugenio@farmaco.io
+      - system: url
+        value: https://farmaco.maxapex.net/brig/fhir
+
+# Jurisdição e contexto legal
+jurisdiction: urn:iso:std:iso:3166#BR
+
+# Dependências FHIR
+dependencies:
+  hl7.fhir.r5.core: 5.0.0
+  hl7.fhir.uv.extensions: 1.0.0
+
+# Parâmetros globais do IG
+parameters:
+  path-resource:
+    - input/resources
+    - fsh-generated/resources
+  path-pages:
+    - input/pagecontent
+    - input/includes
+  path-temp: temp
+  path-output: output
+  path-tx-cache: input-cache/txcache
+  path-history: http://farmaco.maxapex.net/brig/fhir/history.html
+  active-tables: false
+  apply-contact: true
+  apply-jurisdiction: true
+  apply-publisher: true
+  apply-version: true
+  show-inherited-invariants: false
+  usage-stats-opt-out: false
+  excludexml: false
+  excludejson: false
+  excludettl: true
+  excludemap: true
+  excludeexample: false
+
+# Configurações de páginas
+pages:
+  index.md:
+    title: "BRIG - Início"
+    generation: markdown
+  implementation-guide.md:
+    title: "Guia de Implementação"
+    generation: markdown
+  profiles.md:
+    title: "Profiles Brasileiros"
+    generation: markdown
+  terminology.md:
+    title: "Terminologias"
+    generation: markdown
+  examples.md:
+    title: "Exemplos"
+    generation: markdown
+  downloads.md:
+    title: "Downloads"
+    generation: markdown
+
+# Menu de navegação
+menu:
+  Home: index.html
+  "Guia de Implementação":
+    "Visão Geral": implementation-guide.html
+    "Profiles": profiles.html
+    "Terminologias": terminology.html
+    "Exemplos": examples.html
+  "Recursos FHIR":
+    "Profiles": artifacts.html#2
+    "Extensions": artifacts.html#3
+    "Value Sets": artifacts.html#4
+    "Code Systems": artifacts.html#5
+    "Examples": artifacts.html#6
+  "Downloads": downloads.html
+
+# Recursos FSH para incluir
+FSHOnly: false
+applyExtensionMetadataToRoot: false
+
+# Configurações específicas brasileiras
+instanceOptions:
+  setMetaProfile: always
+  setId: always
+  manualSliceOrdering: true
+
+# Metadados adicionais do IG
+extension:
+  - url: http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status
+    valueCode: draft
+  - url: http://hl7.org/fhir/StructureDefinition/structuredefinition-fmm
+    valueInteger: 0
+
+# Copyright e licença
+license: MIT
+copyright: >-
+  Copyright © 2025 Farmaco.io. Este trabalho está licenciado sob a MIT License.
+  FHIR® é marca registrada da HL7 International, usada com permissão.
+
+# Template do IG
