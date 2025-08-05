@@ -26,3 +26,6 @@ npm-debug.log*
 *.tmp
 *.temp
 claude/
+brig-site.tar.gz
+brig-site.zip
+output-essential/
