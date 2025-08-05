@@ -1,0 +1,84 @@
+Instance: MidazolamPackagedExampleBR
+InstanceOf: PackagedProductDefinitionBR
+Usage: #example
+Title: "Exemplo - Midazolam 5mg/mL Embalado (Controlado)"
+Description: "Exemplo de produto controlado embalado brasileiro - Midazolam 5mg/mL ampolas para uso hospitalar"
+
+* id = "midazolam-5mg-packaged"
+
+// Identificadores obrigatórios
+* identifier[ean].system = "http://hl7.org/fhir/sid/gs1"
+* identifier[ean].value = "7891234567123"
+
+* identifier[anvisaPackageCode].system = "http://anvisa.gov.br/produtos/embalagem"
+* identifier[anvisaPackageCode].value = "EMB-CTRL-5678"
+
+// Nome do produto embalado
+* name = "Midazolam 5mg/mL - Caixa hospitalar com 10 ampolas de 3mL"
+
+// Tipo de produto embalado (controlado)
+* type = http://farmaco.maxapex.net/brig/fhir/CodeSystem/packaged-product-type-br#medicamento-controlado
+
+// Referência ao produto medicinal base (assumindo que existe)
+* packageFor = Reference(MedicinalProductDefinitionBR/midazolam-5mg-injectable)
+
+// Status legal de fornecimento (receita especial)
+* legalStatusOfSupply = http://farmaco.maxapex.net/brig/fhir/CodeSystem/legal-status-supply-br#receita-especial
+
+// Status de comercialização
+* marketingStatus[0].country = urn:iso:std:iso:3166#BR
+* marketingStatus[0].status = http://farmaco.maxapex.net/brig/fhir/CodeSystem/marketing-status-br#active
+* marketingStatus[0].dateRange.start = "2018-06-20"
+
+// Características da embalagem (produto controlado e hospitalar)
+* characteristic[0].type = http://farmaco.maxapex.net/brig/fhir/CodeSystem/package-characteristic-br#controlado
+* characteristic[1].type = http://farmaco.maxapex.net/brig/fhir/CodeSystem/package-characteristic-br#hospitalar
+* characteristic[2].type = http://farmaco.maxapex.net/brig/fhir/CodeSystem/package-characteristic-br#protecao-luz
+* characteristic[3].type = http://farmaco.maxapex.net/brig/fhir/CodeSystem/package-characteristic-br#inviolavel
+* characteristic[4].type = http://farmaco.maxapex.net/brig/fhir/CodeSystem/package-characteristic-br#esteril
+
+// Estrutura de embalagem (caixa hospitalar)
+* packaging.type = http://farmaco.maxapex.net/brig/fhir/CodeSystem/packaging-type-br#estojo
+* packaging.quantity = 1
+
+// Material da embalagem secundária
+* packaging.material[0] = http://farmaco.maxapex.net/brig/fhir/CodeSystem/packaging-material-br#papel
+
+// Embalagem primária (ampolas individuais)
+* packaging.packaging[0].type = http://farmaco.maxapex.net/brig/fhir/CodeSystem/packaging-type-br#ampola
+* packaging.packaging[0].quantity = 10
+* packaging.packaging[0].material[0] = http://farmaco.maxapex.net/brig/fhir/CodeSystem/packaging-material-br#vidro
+
+// Item contido nas ampolas
+* packaging.packaging[0].containedItem[0].amount = 3 'mL' "mililitros"
+* packaging.packaging[0].containedItem[0].item.concept.text = "Midazolam 5mg/mL solução injetável"
+
+// Item contido total (estojo)
+* packaging.containedItem[0].amount = 10 '{ampule}' "ampolas"
+* packaging.containedItem[0].item.concept.text = "Midazolam 5mg/mL ampolas"
+
+// Fabricantes (laboratório especializado)
+* manufacturer[0] = Reference(OrganizationANVISASimple/laboratorio-hospitalar-br)
+
+// Meta informações
+* meta.profile = "http://farmaco.maxapex.net/brig/fhir/StructureDefinition/PackagedProductDefinition-br"
+* meta.lastUpdated = "2025-08-02T10:00:00Z"
+
+// Informações textuais
+* text.status = #generated
+* text.div = "<div xmlns='http://www.w3.org/1999/xhtml'>
+  <h2>Midazolam 5mg/mL - Embalagem Hospitalar Controlada</h2>
+  <p><strong>EAN:</strong> 7891234567123</p>
+  <p><strong>Código ANVISA Embalagem:</strong> EMB-CTRL-5678</p>
+  <p><strong>Tipo:</strong> Medicamento Controlado</p>
+  <p><strong>Embalagem:</strong> Estojo hospitalar com 10 ampolas de 3mL</p>
+  <p><strong>Concentração:</strong> 5mg/mL</p>
+  <p><strong>Material Primário:</strong> Ampolas de vidro estéril</p>
+  <p><strong>Material Secundário:</strong> Estojo de papelão reforçado</p>
+  <p><strong>Características:</strong> Produto controlado, uso hospitalar, proteção à luz, estéril, sistema inviolável</p>
+  <p><strong>Status Legal:</strong> Receita de controle especial obrigatória</p>
+  <p><strong>Status:</strong> Ativo para comercialização</p>
+  <p><strong>Volume Total:</strong> 30mL (10 ampolas × 3mL)</p>
+  <p><strong>Fabricante:</strong> Laboratório Hospitalar Brasileiro</p>
+  <p><strong>Lista de Controle:</strong> B1 (Psicotrópicos)</p>
+</div>"

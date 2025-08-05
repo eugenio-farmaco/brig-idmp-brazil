@@ -7,7 +7,10 @@ Description: "Exemplo de produto medicinal brasileiro - Dipirona Sódica 500mg c
 * id = "dipirona-500mg-comp"
 
 // Identificadores
-* identifier[anvisaRegistration].system = "http://farmaco.maxapex.net/brig/fhir/CodeSystem/anvisa-product-registration"
+* identifier[mpid].system = "http://farmaco.maxapex.net/brig/fhir/CodeSystem/mpid-br"
+* identifier[mpid].value = "BR-NEO-001234"
+
+* identifier[anvisaRegistration].system = "http://anvisa.gov.br/medicamentos/registro"
 * identifier[anvisaRegistration].value = "1.0123.4567.001-8"
 
 * identifier[ean].system = "http://hl7.org/fhir/sid/gs1"
@@ -45,11 +48,14 @@ Description: "Exemplo de produto medicinal brasileiro - Dipirona Sódica 500mg c
 * marketingStatus[0].dateRange.start = "2020-03-15"
 
 // Contatos organizacionais
-* contact[0].type = http://hl7.org/fhir/medicinal-product-contact-type#ProposedMAH
-* contact[0].contact = Reference(Organization/neo-quimica-brasil)
+* contact[0].type = http://farmaco.maxapex.net/brig/fhir/CodeSystem/organization-contact-purpose-br#regulatory-affairs
+* contact[0].contact = Reference(OrganizationANVISASimple/neo-quimica-brasil)
 
 // Indicações terapêuticas - usando texto simples
 * indication = "Dor e febre"
+
+// Extensões brasileiras (a serem habilitadas após correção)
+// * extension[http://farmaco.maxapex.net/brig/fhir/StructureDefinition/anvisa-category].valueCodeableConcept = http://farmaco.maxapex.net/brig/fhir/CodeSystem/anvisa-category-br#reference
 
 // Meta informações
 * meta.profile = "http://farmaco.maxapex.net/brig/fhir/StructureDefinition/MedicinalProductDefinition-br"

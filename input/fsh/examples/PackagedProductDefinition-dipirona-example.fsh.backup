@@ -1,0 +1,80 @@
+Instance: DipironaPackagedExampleBR
+InstanceOf: PackagedProductDefinitionBR
+Usage: #example
+Title: "Exemplo - Dipirona Sódica 500mg Embalada"
+Description: "Exemplo de produto embalado brasileiro - Dipirona Sódica 500mg caixa com 20 comprimidos"
+
+* id = "dipirona-500mg-packaged"
+
+// Identificadores obrigatórios
+* identifier[ean].system = "http://hl7.org/fhir/sid/gs1"
+* identifier[ean].value = "7891234567890"
+
+* identifier[anvisaPackageCode].system = "http://anvisa.gov.br/produtos/embalagem"
+* identifier[anvisaPackageCode].value = "EMB-001234"
+
+// Nome do produto embalado
+* name = "Dipirona Sódica Neo Química 500mg - Caixa com 20 comprimidos"
+
+// Tipo de produto embalado
+* type = http://farmaco.maxapex.net/brig/fhir/CodeSystem/packaged-product-type-br#medicamento-generico
+
+// Referência ao produto medicinal base
+* packageFor = Reference(MedicinalProductDefinitionBR/dipirona-500mg-comp)
+
+// Status legal de fornecimento
+* legalStatusOfSupply = http://farmaco.maxapex.net/brig/fhir/CodeSystem/legal-status-supply-br#venda-livre
+
+// Status de comercialização
+* marketingStatus[0].country = urn:iso:std:iso:3166#BR
+* marketingStatus[0].status = http://farmaco.maxapex.net/brig/fhir/CodeSystem/marketing-status-br#active
+* marketingStatus[0].dateRange.start = "2020-03-15"
+
+// Características da embalagem
+* characteristic[0].type = http://farmaco.maxapex.net/brig/fhir/CodeSystem/package-characteristic-br#protecao-luz
+* characteristic[1].type = http://farmaco.maxapex.net/brig/fhir/CodeSystem/package-characteristic-br#protecao-umidade
+* characteristic[2].type = http://farmaco.maxapex.net/brig/fhir/CodeSystem/package-characteristic-br#inviolavel
+
+// Estrutura de embalagem
+* packaging.type = http://farmaco.maxapex.net/brig/fhir/CodeSystem/packaging-type-br#caixa
+* packaging.quantity = 1
+
+// Material da embalagem secundária
+* packaging.material[0] = http://farmaco.maxapex.net/brig/fhir/CodeSystem/packaging-material-br#papel
+
+// Embalagem primária (blister)
+* packaging.packaging[0].type = http://farmaco.maxapex.net/brig/fhir/CodeSystem/packaging-type-br#blister
+* packaging.packaging[0].quantity = 2
+* packaging.packaging[0].material[0] = http://farmaco.maxapex.net/brig/fhir/CodeSystem/packaging-material-br#aluminio
+* packaging.packaging[0].material[1] = http://farmaco.maxapex.net/brig/fhir/CodeSystem/packaging-material-br#pvc
+
+// Item contido na embalagem primária
+* packaging.packaging[0].containedItem[0].amount = 10 '{tablet}' "comprimidos"
+* packaging.packaging[0].containedItem[0].item.concept.text = "Dipirona Sódica 500mg comprimidos"
+
+// Item contido total (caixa)
+* packaging.containedItem[0].amount = 20 '{tablet}' "comprimidos"
+* packaging.containedItem[0].item.concept.text = "Dipirona Sódica 500mg comprimidos"
+
+// Fabricantes
+* manufacturer[0] = Reference(OrganizationANVISASimple/neo-quimica-brasil)
+
+// Meta informações
+* meta.profile = "http://farmaco.maxapex.net/brig/fhir/StructureDefinition/PackagedProductDefinition-br"
+* meta.lastUpdated = "2025-08-02T10:00:00Z"
+
+// Informações textuais
+* text.status = #generated
+* text.div = "<div xmlns='http://www.w3.org/1999/xhtml'>
+  <h2>Dipirona Sódica Neo Química 500mg - Embalagem</h2>
+  <p><strong>EAN:</strong> 7891234567890</p>
+  <p><strong>Código ANVISA Embalagem:</strong> EMB-001234</p>
+  <p><strong>Tipo:</strong> Medicamento Genérico</p>
+  <p><strong>Embalagem:</strong> Caixa com 20 comprimidos</p>
+  <p><strong>Estrutura:</strong> Caixa de papel contendo 2 blisters de 10 comprimidos cada</p>
+  <p><strong>Material Primário:</strong> Blister PVC/Alumínio</p>
+  <p><strong>Material Secundário:</strong> Caixa de papelão</p>
+  <p><strong>Características:</strong> Proteção à luz, umidade e sistema inviolável</p>
+  <p><strong>Status:</strong> Ativo para comercialização</p>
+  <p><strong>Fabricante:</strong> Neo Química Brasil</p>
+</div>"

@@ -2,21 +2,22 @@ Profile: MedicinalProductDefinitionBR
 Parent: MedicinalProductDefinition
 Id: MedicinalProductDefinition-br
 Title: "Definição de Produto Medicinal - Brasil"
-Description: "Profile brasileiro para MedicinalProductDefinition baseado no IDMP, adaptado para o contexto regulatório da ANVISA"
+Description: "Perfil brasileiro para MedicinalProductDefinition baseado no IDMP, adaptado para o contexto regulatório da ANVISA. Documenta produtos medicinais conforme padrões ISO 11615 e regulamentações brasileiras."
 
 * ^version = "0.0.1"
 * ^status = #draft
 * ^experimental = true
 * ^date = "2025-08-02"
 * ^publisher = "Eugênio Neves"
-* ^contact.name = "Eugênio Neves"
+* ^contact.name = "Eugênio Neves - BRIG Brasil"
 * ^contact.telecom[0].system = #email
 * ^contact.telecom[0].value = "eugenio@farmaco.io"
 * ^contact.telecom[1].system = #url
 * ^contact.telecom[1].value = "https://farmaco.maxapex.net/brig/fhir"
 * ^jurisdiction = urn:iso:std:iso:3166#BR
-* ^purpose = "Definir a estrutura padronizada para produtos medicinais no contexto brasileiro, incluindo especificidades da ANVISA"
-* ^copyright = "Copyright © 2025 Farmaco.io. Este trabalho está licenciado sob a MIT License."
+* ^language = #pt-BR
+* ^purpose = "Definir a estrutura padronizada para produtos medicinais no contexto brasileiro, incluindo especificidades da ANVISA e conformidade com ISO 11615"
+* ^copyright = "Copyright © 2025 Farmaco.io. Este trabalho está licenciado sob a MIT License. Documentação em português brasileiro."
 
 // Identificadores obrigatórios para Brasil
 * identifier 1..* MS
@@ -25,12 +26,19 @@ Description: "Profile brasileiro para MedicinalProductDefinition baseado no IDMP
 * identifier ^slicing.rules = #open
 * identifier ^slicing.description = "Identificadores do produto medicinal"
 
-// Slice para Registro ANVISA - obrigatório
+// Slice para MPID - obrigatório (ISO 11615)
+* identifier contains mpid 1..1 MS
+* identifier[mpid].system = "http://farmaco.maxapex.net/brig/fhir/CodeSystem/mpid-br" (exactly)
+* identifier[mpid].value 1..1 MS
+* identifier[mpid] ^short = "MPID - Identificador de Produto Medicinal (ISO 11615)"
+* identifier[mpid] ^definition = "Identificador único do produto medicinal conforme ISO 11615 - formato BR-{Detentor}-{Código}"
+
+// Slice para Registro ANVISA - obrigatório (seguindo padrão oficial brasileiro)
 * identifier contains anvisaRegistration 1..1 MS
-* identifier[anvisaRegistration].system = "http://farmaco.maxapex.net/brig/fhir/CodeSystem/anvisa-product-registration" (exactly)
+* identifier[anvisaRegistration].system = "http://anvisa.gov.br/medicamentos/registro" (exactly)
 * identifier[anvisaRegistration].value 1..1 MS
 * identifier[anvisaRegistration] ^short = "Número de registro na ANVISA"
-* identifier[anvisaRegistration] ^definition = "Número único de registro do produto medicinal junto à ANVISA"
+* identifier[anvisaRegistration] ^definition = "Número único de registro do produto medicinal junto à ANVISA conforme sistema oficial"
 
 // Slice para EAN/GTIN - recomendado
 * identifier contains ean 0..1 MS
@@ -65,13 +73,24 @@ Description: "Profile brasileiro para MedicinalProductDefinition baseado no IDMP
 * route ^short = "Via(s) de administração"
 * route ^definition = "Via(s) de administração aprovada(s) para o produto medicinal"
 
-// Nomes do produto - obrigatório
+// Nomes do produto - obrigatório com suporte a partes estruturadas
 * name 1..* MS
 * name.productName 1..1 MS
 * name.type 1..1 MS
 * name.type from http://farmaco.maxapex.net/brig/fhir/ValueSet/product-name-type-br (required)
 * name ^short = "Nome(s) do produto medicinal"
-* name ^definition = "Nome(s) comercial(is) e/ou científico(s) do produto medicinal"
+* name ^definition = "Nome(s) comercial(is) e/ou científico(s) do produto medicinal com partes estruturadas"
+
+// Extensions para partes estruturadas do nome
+* name.extension contains
+    http://farmaco.maxapex.net/brig/fhir/StructureDefinition/product-name-parts named productNameParts 0..1 MS and
+    http://farmaco.maxapex.net/brig/fhir/StructureDefinition/name-validation-rules named nameValidationRules 0..1 MS
+
+* name.extension[productNameParts] ^short = "Partes estruturadas do nome"
+* name.extension[productNameParts] ^definition = "Decomposição estruturada do nome em partes específicas (fantasia, científico, empresa, etc.)"
+
+* name.extension[nameValidationRules] ^short = "Regras de validação do nome"
+* name.extension[nameValidationRules] ^definition = "Regras específicas de validação aplicáveis ao nome do produto"
 
 // Slicing para diferentes tipos de nomes
 * name ^slicing.discriminator.type = #value
@@ -91,7 +110,11 @@ Description: "Profile brasileiro para MedicinalProductDefinition baseado no IDMP
 * name[scientificName].type = http://farmaco.maxapex.net/brig/fhir/CodeSystem/product-name-type-br#scientific (exactly)
 * name[scientificName].productName 1..1 MS
 * name[scientificName] ^short = "Nome científico"
-* name[scientificName] ^definition = "Nome científico ou denominação comum brasileira (DCB)"
+* name[scientificName] ^definition = "Nome científico ou denominação comum brasileira (DCB) conforme padronização ANVISA"
+
+// Binding com DCB para nomes científicos
+* name[scientificName].extension[productNameParts].extension[scientificNamePart] ^binding.strength = #preferred
+* name[scientificName].extension[productNameParts].extension[scientificNamePart] ^binding.valueSet = "http://farmaco.maxapex.net/brig/fhir/ValueSet/dcb-brasileiras"
 
 // Informações de classificação
 * classification 0..* MS
@@ -126,34 +149,72 @@ Description: "Profile brasileiro para MedicinalProductDefinition baseado no IDMP
 * attachedDocument ^short = "Documentos anexos"
 * attachedDocument ^definition = "Bulas, rotulagem e outros documentos regulatórios anexos"
 
-// Organizações relacionadas
+// Organizações relacionadas (referenciando Organization-anvisa)
 * contact 0..* MS
 * contact.type 1..1 MS
-* contact.type from http://farmaco.maxapex.net/brig/fhir/ValueSet/organization-role-br (required)
+* contact.type from http://farmaco.maxapex.net/brig/fhir/ValueSet/organization-contact-purpose-br (required)
 * contact.contact 1..1 MS
+* contact.contact only Reference(OrganizationANVISASimple)
 * contact ^short = "Contatos organizacionais"
-* contact ^definition = "Organizações relacionadas (titular, fabricante, importador, etc.)"
+* contact ^definition = "Organizações relacionadas conforme padrão ANVISA (titular, fabricante, importador, etc.)"
 
-// Extensões brasileiras específicas (a serem definidas futuramente)
-// * extension contains
-//     http://farmaco.maxapex.net/brig/fhir/StructureDefinition/anvisa-category 0..1 MS and
-//     http://farmaco.maxapex.net/brig/fhir/StructureDefinition/controlled-substance 0..1 MS and
-//     http://farmaco.maxapex.net/brig/fhir/StructureDefinition/generic-reference 0..1 MS
+// Extensões brasileiras específicas - Elementos definidores de MPID e lifecycle
+* extension contains
+    http://farmaco.maxapex.net/brig/fhir/StructureDefinition/therapeutic-indications-defining named therapeuticIndicationsDefining 0..* MS and
+    http://farmaco.maxapex.net/brig/fhir/StructureDefinition/legal-status-defining named legalStatusDefining 0..1 MS and
+    http://farmaco.maxapex.net/brig/fhir/StructureDefinition/associated-devices named associatedDevices 0..* MS and
+    http://farmaco.maxapex.net/brig/fhir/StructureDefinition/identifier-lifecycle-rules named identifierLifecycleRules 0..1 MS and
+    http://farmaco.maxapex.net/brig/fhir/StructureDefinition/documentation-language named documentationLanguage 0..1 MS
+
+* extension[therapeuticIndicationsDefining] ^short = "Indicações terapêuticas definidoras do MPID"
+* extension[therapeuticIndicationsDefining] ^definition = "Indicações terapêuticas que são elementos definidores do MPID - mudanças requerem novo MPID"
+
+* extension[legalStatusDefining] ^short = "Status legal definidor do MPID"
+* extension[legalStatusDefining] ^definition = "Status legal que é elemento definidor do MPID - mudanças requerem novo MPID"
+
+* extension[associatedDevices] ^short = "Dispositivos associados definidores do MPID"
+* extension[associatedDevices] ^definition = "Dispositivos associados que são elementos definidores do MPID"
+
+* extension[identifierLifecycleRules] ^short = "Regras de ciclo de vida do MPID"
+* extension[identifierLifecycleRules] ^definition = "Regras e rastreamento para mudanças no MPID durante o ciclo de vida do produto"
+
+* extension[documentationLanguage] ^short = "Idioma da documentação"
+* extension[documentationLanguage] ^definition = "Define português brasileiro como idioma padrão para toda documentação BRIG"
 
 // Invariantes específicas para Brasil
-* obeys mpd-br-001 and mpd-br-002 and mpd-br-003
-
-Invariant: mpd-br-001
-Description: "Produtos controlados devem ter a extensão controlled-substance preenchida"
-Expression: "characteristic.where(coding.system = 'http://farmaco.maxapex.net/brig/fhir/CodeSystem/product-characteristics-br' and coding.code = 'controlled').exists() implies extension.where(url = 'http://farmaco.maxapex.net/brig/fhir/StructureDefinition/controlled-substance').exists()"
-Severity: #error
+* obeys mpd-br-002 and mpd-br-003 and mpd-br-004 and mpd-br-005 and mpd-br-006 and mpd-br-007 and mpd-br-008
 
 Invariant: mpd-br-002
 Description: "Produtos genéricos devem ter a extensão generic-reference preenchida"
-Expression: "characteristic.where(coding.system = 'http://farmaco.maxapex.net/brig/fhir/CodeSystem/product-characteristics-br' and coding.code = 'generic').exists() implies extension.where(url = 'http://farmaco.maxapex.net/brig/fhir/StructureDefinition/generic-reference').exists()"
-Severity: #error
+Expression: "extension.where(url = 'http://farmaco.maxapex.net/brig/fhir/StructureDefinition/anvisa-category' and valueCodeableConcept.coding.code = 'generic').exists() implies extension.where(url = 'http://farmaco.maxapex.net/brig/fhir/StructureDefinition/generic-reference').exists()"
+Severity: #warning
 
 Invariant: mpd-br-003
 Description: "Registro ANVISA deve seguir padrão brasileiro"
-Expression: "identifier.where(system = 'http://farmaco.maxapex.net/brig/fhir/CodeSystem/anvisa-product-registration').value.matches('^[0-9]{1}\\.[0-9]{4}\\.[0-9]{4}\\.[0-9]{3}-[0-9]{1}$')"
+Expression: "identifier.where(system = 'http://anvisa.gov.br/medicamentos/registro').value.matches('^[0-9]{1}\\.[0-9]{4}\\.[0-9]{4}\\.[0-9]{3}-[0-9]{1}$')"
 Severity: #warning
+
+Invariant: mpd-br-004
+Description: "Mudança em indicações terapêuticas definidoras requer novo MPID"
+Expression: "extension.where(url = 'http://farmaco.maxapex.net/brig/fhir/StructureDefinition/therapeutic-indications-defining').exists() implies extension.where(url = 'http://farmaco.maxapex.net/brig/fhir/StructureDefinition/therapeutic-indications-defining').all(valueCodeableConcept.exists())"
+Severity: #warning
+
+Invariant: mpd-br-005
+Description: "Mudança em status legal definidor requer novo MPID"
+Expression: "extension.where(url = 'http://farmaco.maxapex.net/brig/fhir/StructureDefinition/legal-status-defining').exists() implies extension.where(url = 'http://farmaco.maxapex.net/brig/fhir/StructureDefinition/legal-status-defining').valueCodeableConcept.exists()"
+Severity: #warning
+
+Invariant: mpd-br-006
+Description: "Motivo de mudança deve ser consistente com tipo de elemento alterado"
+Expression: "extension.where(url = 'http://farmaco.maxapex.net/brig/fhir/StructureDefinition/identifier-lifecycle-rules').exists() implies extension.where(url = 'http://farmaco.maxapex.net/brig/fhir/StructureDefinition/identifier-lifecycle-rules').extension.where(url = 'changeReason').valueCodeableConcept.exists()"
+Severity: #warning
+
+Invariant: mpd-br-007
+Description: "MPID anterior deve ser fornecido quando há mudança que requer novo MPID"
+Expression: "extension.where(url = 'http://farmaco.maxapex.net/brig/fhir/StructureDefinition/identifier-lifecycle-rules').extension.where(url = 'changeReason').valueCodeableConcept.coding.where(code.memberOf('http://farmaco.maxapex.net/brig/fhir/ValueSet/mpid-requiring-changes')).exists() implies extension.where(url = 'http://farmaco.maxapex.net/brig/fhir/StructureDefinition/identifier-lifecycle-rules').extension.where(url = 'previousMPID').valueString.exists()"
+Severity: #error
+
+Invariant: mpd-br-008
+Description: "Produto deve ter pelo menos nome fantasia OU nome científico"
+Expression: "name.where(type.coding.code = 'commercial').exists() or name.where(type.coding.code = 'scientific').exists()"
+Severity: #error

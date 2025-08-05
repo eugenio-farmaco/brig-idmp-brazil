@@ -1,0 +1,150 @@
+Profile: OrganizationANVISA
+Parent: Organization
+Id: Organization-anvisa
+Title: "Organização ANVISA - Brasil"
+Description: "Profile brasileiro para Organization no contexto regulatório da ANVISA, baseado em artefatos oficiais do Ministério da Saúde"
+
+* ^version = "0.0.1"
+* ^status = #draft
+* ^experimental = true
+* ^date = "2025-08-02"
+* ^publisher = "Eugênio Neves"
+* ^contact.name = "Eugênio Neves"
+* ^contact.telecom[0].system = #email
+* ^contact.telecom[0].value = "eugenio@farmaco.io"
+* ^contact.telecom[1].system = #url
+* ^contact.telecom[1].value = "https://farmaco.maxapex.net/brig/fhir"
+* ^jurisdiction = urn:iso:std:iso:3166#BR
+* ^purpose = "Definir a estrutura padronizada para organizações no contexto regulatório da ANVISA, seguindo padrões oficiais brasileiros do Ministério da Saúde"
+* ^copyright = "Copyright © 2025 Farmaco.io. Este trabalho está licenciado sob a MIT License."
+
+// Identificadores obrigatórios para organizações brasileiras
+* identifier 1..* MS
+* identifier ^slicing.discriminator.type = #value
+* identifier ^slicing.discriminator.path = "system"
+* identifier ^slicing.rules = #open
+* identifier ^slicing.description = "Identificadores da organização no contexto brasileiro"
+
+// CNPJ - obrigatório para empresas brasileiras (seguindo padrão oficial MS)
+* identifier contains cnpj 1..1 MS
+* identifier[cnpj].system = "https://saude.gov.br/fhir/sid/cnpj" (exactly)
+* identifier[cnpj].value 1..1 MS
+* identifier[cnpj] ^short = "CNPJ"
+* identifier[cnpj] ^definition = "Cadastro Nacional de Pessoa Jurídica - identificador obrigatório para empresas brasileiras conforme padrão oficial do Ministério da Saúde"
+
+// AFE - Autorização de Funcionamento ANVISA (obrigatório)
+* identifier contains afe 1..1 MS
+* identifier[afe].system = "http://anvisa.gov.br/afe" (exactly)
+* identifier[afe].value 1..1 MS
+* identifier[afe] ^short = "AFE - Autorização de Funcionamento ANVISA"
+* identifier[afe] ^definition = "Autorização de Funcionamento de Empresa junto à ANVISA - obrigatório para organizações que atuam com produtos regulados"
+
+// CNES - opcional mas recomendado para estabelecimentos de saúde
+* identifier contains cnes 0..1 MS
+* identifier[cnes].system = "http://cnes.datasus.gov.br" (exactly)
+* identifier[cnes].value 1..1 MS
+* identifier[cnes] ^short = "CNES"
+* identifier[cnes] ^definition = "Cadastro Nacional de Estabelecimentos de Saúde"
+
+// Autorização Especial ANVISA - quando aplicável
+* identifier contains autorizacaoEspecial 0..1 MS
+* identifier[autorizacaoEspecial].system = "http://anvisa.gov.br/autorizacao-especial" (exactly)
+* identifier[autorizacaoEspecial].value 1..1 MS
+* identifier[autorizacaoEspecial] ^short = "Autorização Especial ANVISA"
+* identifier[autorizacaoEspecial] ^definition = "Autorização especial da ANVISA para atividades específicas (substâncias controladas, etc.)"
+
+// EMA SPOR Organization ID - para interoperabilidade europeia
+* identifier contains emaSporId 0..1 MS
+* identifier[emaSporId].system = "http://spor.ema.europa.eu/v1/organisations" (exactly)
+* identifier[emaSporId].value 1..1 MS
+* identifier[emaSporId] ^short = "EMA SPOR Organization ID"
+* identifier[emaSporId] ^definition = "Identificador da organização no sistema SPOR da EMA para interoperabilidade europeia"
+
+// FDA Establishment ID - para interoperabilidade americana
+* identifier contains fdaEstablishmentId 0..1 MS
+* identifier[fdaEstablishmentId].system = "http://www.fda.gov/establishment-identifier" (exactly)
+* identifier[fdaEstablishmentId].value 1..1 MS
+* identifier[fdaEstablishmentId] ^short = "FDA Establishment ID"
+* identifier[fdaEstablishmentId] ^definition = "Identificador de estabelecimento da FDA para interoperabilidade americana"
+
+// DUNS Number - identificação global
+* identifier contains dunsNumber 0..1 MS
+* identifier[dunsNumber].system = "http://www.duns.com/" (exactly)
+* identifier[dunsNumber].value 1..1 MS
+* identifier[dunsNumber] ^short = "DUNS Number"
+* identifier[dunsNumber] ^definition = "Data Universal Numbering System - identificador global da organização"
+
+// Status obrigatório
+* active 1..1 MS
+* active ^short = "Status ativo da organização"
+* active ^definition = "Indica se a organização está ativa ou inativa"
+
+// Tipo/Classificação da organização - obrigatório
+* type 1..* MS
+* type from http://farmaco.maxapex.net/brig/fhir/ValueSet/organization-type-anvisa-br (required)
+* type ^short = "Tipo da organização"
+* type ^definition = "Classificação da organização no contexto regulatório da ANVISA"
+
+// Nome obrigatório
+* name 1..1 MS
+* name ^short = "Nome da organização"
+* name ^definition = "Razão social ou nome oficial da organização"
+
+// Alias/nomes alternativos
+* alias 0..* MS
+* alias ^short = "Nomes alternativos"
+* alias ^definition = "Nomes fantasia, marcas ou outros nomes pelos quais a organização é conhecida"
+
+// Telecomunicações obrigatórias
+* telecom 1..* MS
+* telecom ^short = "Contatos da organização"
+* telecom ^definition = "Informações de contato da organização (telefone, email, etc.)"
+
+// Endereço obrigatório seguindo padrão brasileiro
+* address 1..* MS
+* address ^short = "Endereço da organização"
+* address ^definition = "Endereço da sede ou estabelecimento da organização no Brasil"
+
+// Organização parte de outra - para filiais, subsidiárias
+* partOf 0..1 MS
+* partOf only Reference(OrganizationANVISA)
+* partOf ^short = "Organização matriz"
+* partOf ^definition = "Referência à organização matriz quando esta for filial ou subsidiária"
+
+// Contatos específicos
+* contact 0..* MS
+* contact.purpose 1..1 MS
+* contact.purpose from http://farmaco.maxapex.net/brig/fhir/ValueSet/organization-contact-purpose-br (required)
+* contact.name 1..1 MS
+* contact.telecom 1..* MS
+* contact ^short = "Contatos especializados"
+* contact ^definition = "Contatos específicos da organização (responsável técnico, farmacovigilância, etc.)"
+
+// Endpoints para sistemas
+* endpoint 0..* MS
+* endpoint ^short = "Endpoints técnicos"
+* endpoint ^definition = "Endpoints para integração de sistemas"
+
+// Extensões específicas brasileiras para organizações (a serem habilitadas após testes)
+// * extension contains
+//     http://farmaco.maxapex.net/brig/fhir/StructureDefinition/organization-regulatory-status-br 0..1 MS and
+//     http://farmaco.maxapex.net/brig/fhir/StructureDefinition/organization-operational-category-br 0..1 MS and
+//     http://farmaco.maxapex.net/brig/fhir/StructureDefinition/organization-business-size-br 0..1 MS
+
+// Invariantes específicas para organizações brasileiras
+* obeys org-anvisa-001 and org-anvisa-002 and org-anvisa-003
+
+Invariant: org-anvisa-001
+Description: "Organizações brasileiras devem ter CNPJ e AFE"
+Expression: "identifier.where(system = 'https://saude.gov.br/fhir/sid/cnpj').exists() and identifier.where(system = 'http://anvisa.gov.br/afe').exists()"
+Severity: #error
+
+Invariant: org-anvisa-002
+Description: "CNPJ deve seguir padrão brasileiro válido"
+Expression: "identifier.where(system = 'https://saude.gov.br/fhir/sid/cnpj').value.matches('^[0-9]{2}\\.[0-9]{3}\\.[0-9]{3}/[0-9]{4}-[0-9]{2}$')"
+Severity: #warning
+
+Invariant: org-anvisa-003
+Description: "Endereço brasileiro deve ter CEP válido"
+Expression: "address.where(country = 'BR').postalCode.matches('^[0-9]{5}-?[0-9]{3}$')"
+Severity: #warning
