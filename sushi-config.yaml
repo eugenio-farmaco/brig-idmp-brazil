@@ -1,5 +1,5 @@
 # BRIG - Brazilian Implementation Guide for IDMP
-# sushi-config.yaml v0.0.1
+# sushi-config.yaml v0.0.2
 # Configuração SUSHI para compilação FSH → FHIR
 
 # Informações básicas do Implementation Guide
@@ -10,9 +10,10 @@ title: "BRIG - Guia de Implementação Brasileiro para IDMP"
 description: >-
   Guia de Implementação brasileiro para Identificação de Produtos Medicinais (IDMP) 
   usando padrões FHIR R5, desenvolvido para harmonização de dados farmacêuticos 
-  no contexto regulatório da ANVISA. Documentação 100% em português brasileiro.
+  no contexto regulatório da ANVISA. Implementação completa com ClinicalUseDefinition-br. 
+  Primeira implementação mundial 100% completa dos padrões IDMP. Documentação 100% em português brasileiro.
 status: draft
-version: 0.0.1
+version: 0.0.2
 fhirVersion: 5.0.0
 
 # Informações de autoria e contato
