@@ -42,17 +42,17 @@ Description: "Exemplo de RegulatedAuthorization para registro ANVISA da dipirona
 // Base legal (usando basis)
 * basis[+] = http://farmaco.maxapex.net/brig/fhir/CodeSystem/legal-basis-anvisa-br#rdc-753-2022 "RDC 753/2022"
 
-// Indicações terapêuticas
-* indication[+].coding.system = "http://snomed.info/sct"
-* indication[=].coding.code = #22253000
-* indication[=].coding.display = "Pain"
+// Indicações terapêuticas (temporariamente comentadas)
+// * indication[+].coding.system = "http://snomed.info/sct"
+// * indication[=].coding.code = #22253000
+// * indication[=].coding.display = "Pain"
 
-* indication[+].coding.system = "http://snomed.info/sct"  
-* indication[=].coding.code = #386661006
-* indication[=].coding.display = "Fever"
+// * indication[+].coding.system = "http://snomed.info/sct"  
+// * indication[=].coding.code = #386661006
+// * indication[=].coding.display = "Fever"
 
 // Extension para categoria de registro ANVISA
-* extension[+].url = "http://farmaco.maxapex.net/brig/fhir/StructureDefinition/anvisa-registration-category"
-* extension[=].valueCodeableConcept.coding.system = "http://farmaco.maxapex.net/brig/fhir/CodeSystem/anvisa-category-br"
-* extension[=].valueCodeableConcept.coding.code = #medicamento-similar
-* extension[=].valueCodeableConcept.coding.display = "Medicamento Similar"
+// * extension[+].url = "http://farmaco.maxapex.net/brig/fhir/StructureDefinition/anvisa-registration-category"
+// * extension[=].valueCodeableConcept.coding.system = "http://farmaco.maxapex.net/brig/fhir/CodeSystem/anvisa-category-br"
+// * extension[=].valueCodeableConcept.coding.code = #medicamento-similar
+// * extension[=].valueCodeableConcept.coding.display = "Medicamento Similar"

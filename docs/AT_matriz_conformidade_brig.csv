@@ -1,0 +1,51 @@
+Componente,Tipo,Status,Conformidade_FHIR,Conformidade_IDMP,Conformidade_ANVISA,Gaps_Identificados,Acao_Recomendada,Prioridade,Esforco_Estimado
+MedicinalProductDefinition-br,Profile,Completo,95%,90%,95%,Extensions comentadas,Reativar extensions desabilitadas,Alta,2-3 dias
+SubstanceDefinition-br,Profile,Completo,95%,85%,90%,Propriedades limitadas,Expandir propriedades físico-químicas,Média,1-2 semanas
+PackagedProductDefinition-br,Profile,Completo*,90%,85%,90%,Recursão limitada,Remover limitação recursão,Média,1 semana
+Organization-anvisa-simple,Profile,Básico,85%,N/A,95%,Perfil simplificado,Expandir para perfil completo,Baixa,1-2 semanas
+AdministrableProductDefinition-br,Profile,Básico,80%,70%,85%,Implementação limitada,Completar implementação,Alta,2-3 semanas
+ManufacturedItemDefinition-br,Profile,Básico,80%,70%,85%,Implementação limitada,Completar implementação,Alta,2-3 semanas
+Ingredient-br,Profile,Completo,90%,80%,90%,Concentrações complexas,Expandir tipos concentração,Média,1 semana
+ClinicalUseDefinition,Profile,Ausente,0%,0%,0%,Recurso não implementado,Implementar profile completo,Crítica,3-4 semanas
+RegulatedAuthorization,Profile,Ausente,0%,0%,0%,Recurso não implementado,Implementar profile completo,Alta,2-3 semanas
+ANVISACategory,Extension,Completo,95%,N/A,100%,Nenhum,Nenhuma,N/A,N/A
+ANVISARegulatoryStatus,Extension,Completo,95%,N/A,95%,Nenhum,Nenhuma,N/A,N/A
+ControlledSubstanceCategory,Extension,Completo,95%,N/A,95%,Nenhum,Nenhuma,N/A,N/A
+DocumentationLanguage,Extension,Completo,100%,N/A,100%,Nenhum,Nenhuma,N/A,N/A
+GenericReference,Extension,Completo,90%,N/A,95%,Validação limitada,Implementar validações,Baixa,2-3 dias
+IdentifierLifecycle,Extension,Completo,95%,90%,95%,Nenhum,Nenhuma,N/A,N/A
+MPID-DefiningElements,Extension,Completo,95%,95%,95%,Nenhum,Nenhuma,N/A,N/A
+PCID-DefiningElements,Extension,Completo,95%,95%,95%,Nenhum,Nenhuma,N/A,N/A
+OrganizationBusinessSizeBR,Extension,Completo,90%,N/A,95%,Nenhum,Nenhuma,N/A,N/A
+OrganizationOperationalCategoryBR,Extension,Completo,90%,N/A,95%,Nenhum,Nenhuma,N/A,N/A
+OrganizationRegulatoryStatusBR,Extension,Completo,90%,N/A,95%,Nenhum,Nenhuma,N/A,N/A
+ProductNameParts,Extension,Completo,95%,90%,95%,DCB binding,Melhorar binding DCB,Baixa,1 semana
+UMC-Integration,Extension,Placeholder,70%,60%,N/A,Coordenação internacional,Coordenar com UMC/OMS,Baixa,6+ meses
+BrazilianGovernmentSystems,CodeSystem,Completo,100%,N/A,100%,Nenhum,Nenhuma,N/A,N/A
+ANVISACategoryBR,CodeSystem,Completo,100%,N/A,100%,Nenhum,Nenhuma,N/A,N/A
+MedicinalProductTypeBR,CodeSystem,Completo,100%,N/A,95%,Alguns tipos ausentes,Expandir tipos produto,Baixa,1 semana
+SubstanceClassificationBR,CodeSystem,Exemplar,80%,N/A,85%,Cobertura limitada,Expandir classificações,Média,2 semanas
+SubstanceGradeBR,CodeSystem,Completo,100%,N/A,95%,Nenhum,Nenhuma,N/A,N/A
+DCBBrasileiras,CodeSystem,Exemplar,90%,N/A,90%,25 DCBs apenas,Expandir para 500+ DCBs,Alta,4-6 semanas
+LegalStatusSupplyBR,ValueSet,Completo,95%,N/A,95%,Nenhum,Nenhuma,N/A,N/A
+MarketingStatusBR,ValueSet,Completo,95%,N/A,95%,Nenhum,Nenhuma,N/A,N/A
+PackagingTypeBR,ValueSet,Completo,95%,N/A,90%,Alguns tipos ausentes,Expandir tipos embalagem,Baixa,1 semana
+DipironaExampleBR,Instance,Completo,90%,85%,90%,Extensions comentadas,Ativar extensions,Baixa,1 dia
+DipironaSubstanceExampleBR,Instance,Completo,90%,85%,90%,Propriedades limitadas,Expandir propriedades,Baixa,1 dia
+MidazolamExampleBR,Instance,Completo,85%,80%,95%,Substância controlada,Validar extensões controle,Baixa,1 dia
+PackagedProductExamples,Instance,Completo,85%,80%,85%,PCID placeholder,Implementar PCID real,Média,1 semana
+OrganizationExamples,Instance,Básico,80%,N/A,85%,Dados simplificados,Expandir dados organizacionais,Baixa,2-3 dias
+FHIR_R5_Conformance,Compilação,Excelente,95%,N/A,N/A,1 warning apenas,Corrigir nomes duplicados,Baixa,1 dia
+SUSHI_Compilation,Build,Sucesso,100%,N/A,N/A,142 recursos válidos,Nenhuma,N/A,N/A
+ISO_11615_MPID,Padrão,Implementado,N/A,90%,N/A,Alguns elementos ausentes,Completar elementos MPID,Média,1-2 semanas
+ISO_11615_PCID,Padrão,Implementado,N/A,85%,N/A,Elementos definidores,Expandir elementos PCID,Média,1-2 semanas
+ISO_11615_PHPID,Padrão,Placeholder,N/A,30%,N/A,Coordenação UMC,Coordenar internacionalmente,Baixa,6+ meses
+ANVISA_Registration,Sistema,Integrado,N/A,N/A,95%,Formato validação,Melhorar validação formato,Baixa,1 semana
+ANVISA_DCB,Sistema,Integrado,N/A,N/A,90%,Cobertura limitada,Expandir cobertura DCB,Alta,4-6 semanas
+ANVISA_AFE,Sistema,Integrado,N/A,N/A,95%,Nenhum,Nenhuma,N/A,N/A
+Automated_Testing,Infraestrutura,Ausente,N/A,N/A,N/A,Sem testes automatizados,Implementar suite testes,Alta,2-3 semanas
+CI_CD_Pipeline,Infraestrutura,Ausente,N/A,N/A,N/A,Sem pipeline,Implementar CI/CD,Média,1-2 semanas
+Documentation_Technical,Documentação,Excelente,N/A,N/A,N/A,Muito detalhada,Manter atualizada,Baixa,Contínuo
+Documentation_User,Documentação,Limitada,N/A,N/A,N/A,Para desenvolvedores apenas,Criar docs usuário final,Média,2-3 semanas
+Terminology_Maintenance,Processo,Manual,N/A,N/A,N/A,Processo manual,Automatizar manutenção,Baixa,4-6 semanas
+Version_Management,Processo,Básico,N/A,N/A,N/A,Versionamento manual,Implementar versionamento automático,Baixa,1-2 semanas

@@ -108,11 +108,11 @@ Description: "Profile brasileiro para RegulatedAuthorization representando autor
 * indication ^short = "Indicações específicas"
 * indication ^definition = "Indicações específicas da autorização quando aplicável"
 
-// Extensões específicas brasileiras
-* extension contains 
-    http://farmaco.maxapex.net/brig/fhir/StructureDefinition/anvisa-registration-category 0..1 MS and
-    http://farmaco.maxapex.net/brig/fhir/StructureDefinition/variation-classification 0..1 MS and
-    http://farmaco.maxapex.net/brig/fhir/StructureDefinition/renewal-history 0..1 MS
+// Extensões específicas brasileiras (temporariamente comentadas)
+// * extension contains 
+//     http://farmaco.maxapex.net/brig/fhir/StructureDefinition/anvisa-registration-category 0..1 MS and
+//     http://farmaco.maxapex.net/brig/fhir/StructureDefinition/variation-classification 0..1 MS and
+//     http://farmaco.maxapex.net/brig/fhir/StructureDefinition/renewal-history 0..1 MS
 
 // Invariantes específicas para Brasil
 * obeys reg-br-001 and reg-br-002 and reg-br-003 and reg-br-004

@@ -47,25 +47,25 @@ Description: "Exemplo de RegulatedAuthorization para renovação de registro ANV
 * basis[+] = http://farmaco.maxapex.net/brig/fhir/CodeSystem/legal-basis-anvisa-br#rdc-317-2019 "RDC 317/2019"
 
 // Indicações mantidas na renovação  
-* indication[+].coding.system = "http://snomed.info/sct"
-* indication[=].coding.code = #22253000
-* indication[=].coding.display = "Pain"
+// * indication[+].coding.system = "http://snomed.info/sct"
+// * indication[=].coding.code = #22253000
+// * indication[=].coding.display = "Pain"
 
-* indication[+].coding.system = "http://snomed.info/sct"
-* indication[=].coding.code = #386661006
-* indication[=].coding.display = "Fever"
+// * indication[+].coding.system = "http://snomed.info/sct"
+// * indication[=].coding.code = #386661006
+// * indication[=].coding.display = "Fever"
 
 // Extension para histórico de renovação
-* extension[+].url = "http://farmaco.maxapex.net/brig/fhir/StructureDefinition/renewal-history"
-* extension[=].extension[+].url = "previousRegistration"
-* extension[=].extension[=].valueString = "1.5678.9012.345-6"
-* extension[=].extension[+].url = "previousValidityEnd"
-* extension[=].extension[=].valueDate = "2024-08-31"
-* extension[=].extension[+].url = "renewalCount"
-* extension[=].extension[=].valueInteger = 1
+// * extension[+].url = "http://farmaco.maxapex.net/brig/fhir/StructureDefinition/renewal-history"
+// * extension[=].extension[+].url = "previousRegistration"
+// * extension[=].extension[=].valueString = "1.5678.9012.345-6"
+// * extension[=].extension[+].url = "previousValidityEnd"
+// * extension[=].extension[=].valueDate = "2024-08-31"
+// * extension[=].extension[+].url = "renewalCount"
+// * extension[=].extension[=].valueInteger = 1
 
 // Extension para categoria de registro (medicamento genérico)
-* extension[+].url = "http://farmaco.maxapex.net/brig/fhir/StructureDefinition/anvisa-registration-category"
-* extension[=].valueCodeableConcept.coding.system = "http://farmaco.maxapex.net/brig/fhir/CodeSystem/anvisa-category-br"
-* extension[=].valueCodeableConcept.coding.code = #medicamento-generico
-* extension[=].valueCodeableConcept.coding.display = "Medicamento Genérico"
+// * extension[+].url = "http://farmaco.maxapex.net/brig/fhir/StructureDefinition/anvisa-registration-category"
+// * extension[=].valueCodeableConcept.coding.system = "http://farmaco.maxapex.net/brig/fhir/CodeSystem/anvisa-category-br"
+// * extension[=].valueCodeableConcept.coding.code = #medicamento-generico
+// * extension[=].valueCodeableConcept.coding.display = "Medicamento Genérico"
