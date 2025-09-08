@@ -60,9 +60,9 @@ Description: "Exemplo de SubstanceDefinition para Paracetamol com identificadore
 * structure.representation[=].representation = "InChI=1S/C8H9NO2/c1-6(10)9-7-2-4-8(11)5-3-7/h2-5,11H,1H3,(H,9,10)"
 
 // Códigos adicionais
-* code[+].coding.system = "http://www.whocc.no/atc"
-* code[=].coding.code = #N02BE01
-* code[=].coding.display = "paracetamol"
+* code[+].code.coding.system = "http://www.whocc.no/atc"
+* code[=].code.coding.code = #N02BE01
+* code[=].code.coding.display = "paracetamol"
 
 // Descrição
 * description = "O paracetamol (acetaminofeno) é um analgésico e antipirético amplamente utilizado. É um inibidor fraco da síntese de prostaglandinas com ação predominantemente central."

@@ -20,33 +20,24 @@ Description: "Exemplo de uso clínico da Dipirona 500mg para tratamento de dor e
 // Referência para o produto Dipirona
 * subject = Reference(dipirona-500mg-example)
 
-// População geral adulta
-* population[0].age.low.value = 18
-* population[0].age.low.unit = "anos"
-* population[0].age.low.system = "http://unitsofmeasure.org"
-* population[0].age.low.code = #a
-* population[0].gender = #male
-* population[1].age.low.value = 18
-* population[1].age.low.unit = "anos"
-* population[1].age.low.system = "http://unitsofmeasure.org"
-* population[1].age.low.code = #a
-* population[1].gender = #female
+// População geral adulta (Reference para Group seria ideal, mas simplificado aqui)
+// Removido por não ser compatível com FHIR R5 - population é Reference(Group)
 
 // Indicação para dor
 * indication.diseaseSymptomProcedure = http://hl7.org/fhir/sid/icd-10#R52.9 "Dor não especificada"
 
-* indication.diseaseStatus.coding[0].system = "http://snomed.info/sct"
-* indication.diseaseStatus.coding[0].code = #255212004
-* indication.diseaseStatus.coding[0].display = "Acute (qualifier value)"
-* indication.diseaseStatus.text = "Dor aguda a moderada"
+* indication.diseaseStatus.concept.coding[0].system = "http://snomed.info/sct"
+* indication.diseaseStatus.concept.coding[0].code = #255212004
+* indication.diseaseStatus.concept.coding[0].display = "Acute (qualifier value)"
+* indication.diseaseStatus.concept.text = "Dor aguda a moderada"
 
 // Comorbidades relevantes
 * indication.comorbidity[0] = http://hl7.org/fhir/sid/icd-10#R50.9 "Febre não especificada"
 
 // Efeito pretendido
-* indication.intendedEffect.coding[0].system = "http://snomed.info/sct" 
-* indication.intendedEffect.coding[0].code = #182856006
-* indication.intendedEffect.coding[0].display = "Analgesia (procedure)"
+* indication.intendedEffect.concept.coding[0].system = "http://snomed.info/sct" 
+* indication.intendedEffect.concept.coding[0].code = #182856006
+* indication.intendedEffect.concept.coding[0].display = "Analgesia (procedure)"
 
 // Duração do tratamento
 * indication.durationString = "5 dias"
@@ -70,11 +61,8 @@ Description: "Exemplo de contraindicação da Dipirona 500mg em pacientes com hi
 // Referência para o produto Dipirona
 * subject = Reference(dipirona-500mg-example)
 
-// Todas as populações
-* population[0].age.low.value = 0
-* population[0].age.low.unit = "anos"
-* population[0].age.low.system = "http://unitsofmeasure.org"
-* population[0].age.low.code = #a
+// Todas as populações (Reference para Group seria ideal, mas simplificado aqui)
+// Removido por não ser compatível com FHIR R5 - population é Reference(Group)
 
 // Contraindicação por hipersensibilidade
 * contraindication.diseaseSymptomProcedure = http://snomed.info/sct#419511003 "Propensity to adverse reactions to drug (finding)"
@@ -102,28 +90,25 @@ Description: "Exemplo de uso clínico do Paracetamol 750mg para tratamento de fe
 // Referência para produto Paracetamol (placeholder - seria criado separadamente)
 * subject = Reference(paracetamol-750mg-example)
 
-// População adulta e pediátrica
-* population[0].age.low.value = 12
-* population[0].age.low.unit = "anos"
-* population[0].age.low.system = "http://unitsofmeasure.org"
-* population[0].age.low.code = #a
+// População adulta e pediátrica (Reference para Group seria ideal, mas simplificado aqui)
+// Removido por não ser compatível com FHIR R5 - population é Reference(Group)
 
 // Indicação para febre
 * indication.diseaseSymptomProcedure = http://hl7.org/fhir/sid/icd-10#R50.9 "Febre não especificada"
 
-* indication.diseaseStatus.coding[0].system = "http://snomed.info/sct"
-* indication.diseaseStatus.coding[0].code = #255212004
-* indication.diseaseStatus.coding[0].display = "Acute (qualifier value)"
-* indication.diseaseStatus.text = "Febre aguda"
+* indication.diseaseStatus.concept.coding[0].system = "http://snomed.info/sct"
+* indication.diseaseStatus.concept.coding[0].code = #255212004
+* indication.diseaseStatus.concept.coding[0].display = "Acute (qualifier value)"
+* indication.diseaseStatus.concept.text = "Febre aguda"
 
 // Comorbidades - dor associada
 * indication.comorbidity[0] = http://hl7.org/fhir/sid/icd-10#R52.9 "Dor não especificada"
 * indication.comorbidity[1] = http://hl7.org/fhir/sid/icd-10#G43.9 "Enxaqueca não especificada"
 
 // Efeito pretendido
-* indication.intendedEffect.coding[0].system = "http://snomed.info/sct"
-* indication.intendedEffect.coding[0].code = #86799002
-* indication.intendedEffect.coding[0].display = "Fever reduction (procedure)"
+* indication.intendedEffect.concept.coding[0].system = "http://snomed.info/sct"
+* indication.intendedEffect.concept.coding[0].code = #86799002
+* indication.intendedEffect.concept.coding[0].display = "Fever reduction (procedure)"
 
 // Duração do tratamento
 * indication.durationString = "3 dias"
@@ -147,11 +132,8 @@ Description: "Exemplo de interação medicamentosa do Paracetamol com álcool - 
 // Referência para produto Paracetamol
 * subject = Reference(paracetamol-750mg-example)
 
-// População adulta com uso de álcool
-* population[0].age.low.value = 18
-* population[0].age.low.unit = "anos" 
-* population[0].age.low.system = "http://unitsofmeasure.org"
-* population[0].age.low.code = #a
+// População adulta com uso de álcool (Reference para Group seria ideal, mas simplificado aqui)
+// Removido por não ser compatível com FHIR R5 - population é Reference(Group)
 
 // Interação com álcool
 * interaction.interactant[0].itemCodeableConcept = http://snomed.info/sct#419442005 "Ethyl alcohol (substance)"
@@ -163,9 +145,9 @@ Description: "Exemplo de interação medicamentosa do Paracetamol com álcool - 
 * interaction.type.text = "Interação farmacocinética"
 
 // Efeito - hepatotoxicidade
-* interaction.effect.coding[0].system = "http://snomed.info/sct"
-* interaction.effect.coding[0].code = #197354008
-* interaction.effect.coding[0].display = "Toxic effect of paracetamol (disorder)"
+* interaction.effect.concept.coding[0].system = "http://snomed.info/sct"
+* interaction.effect.concept.coding[0].code = #197354008
+* interaction.effect.concept.coding[0].display = "Toxic effect of paracetamol (disorder)"
 
 // Incidência
 * interaction.incidence.coding[0].system = "http://snomed.info/sct"
