@@ -14,7 +14,7 @@ Description: "Exemplo básico de produto medicinal Paracetamol 750mg comprimido 
 * identifier[anvisaRegistration].system = "http://anvisa.gov.br/medicamentos/registro"
 * identifier[anvisaRegistration].value = "100000000002"
 
-* type = http://hl7.org/fhir/medicinal-product-type#MedicinalProduct
+* type = http://farmaco.maxapex.net/brig/fhir/CodeSystem/medicinal-product-type-br#medicamento "Medicamento"
 
 * domain = http://hl7.org/fhir/medicinal-product-domain#Human
 
@@ -22,19 +22,20 @@ Description: "Exemplo básico de produto medicinal Paracetamol 750mg comprimido 
 
 * combinedPharmaceuticalDoseForm = http://hl7.org/fhir/administrable-dose-form#100000073664 "Tablet"
 
-* legalStatusOfSupply = http://hl7.org/fhir/legal-status-of-supply#100000072076 "Medicinal product not subject to medical prescription"
+* legalStatusOfSupply = http://farmaco.maxapex.net/brig/fhir/CodeSystem/legal-status-supply-br#venda-livre "Venda Livre"
 
 * classification[+] = http://www.whocc.no/atc#N02BE01 "paracetamol"
 
-* name.productName = "Paracetamol 750mg"
-* name.usage.country = urn:iso:std:iso:3166#BR
-* name.usage.jurisdiction = urn:iso:std:iso:3166#BR
-* name.usage.language = urn:ietf:bcp:47#pt-BR
+* name[commercialName].type = http://farmaco.maxapex.net/brig/fhir/CodeSystem/product-name-type-br#commercial
+* name[commercialName].productName = "Paracetamol 750mg"
+* name[commercialName].usage.country = urn:iso:std:iso:3166#BR
+* name[commercialName].usage.language = urn:ietf:bcp:47#pt-BR
 
 // Rota de administração (obrigatório)
 * route[+] = http://hl7.org/fhir/route-codes#PO "Oral"
 
 // Status de marketing (obrigatório)
+* marketingStatus.country = urn:iso:std:iso:3166#BR
 * marketingStatus.status = http://hl7.org/fhir/publication-status#active
 * marketingStatus.dateRange.start = "2024-01-01"
 

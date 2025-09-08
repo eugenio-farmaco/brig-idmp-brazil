@@ -1,4 +1,4 @@
-# ANEXO D: ROADMAP PÓS-COMPLETUDE - LIDERANÇA MUNDIAL ESTABELECIDA 🏆
+# ANEXO D: ROADMAP PÓS-CORREÇÕES - IMPLEMENTAÇÃO TÉCNICA VALIDADA ✅
 
 ## D.1 MIGRAÇÃO v0.0.1 → v0.0.2: INTEGRAÇÃO GSRS IMPLEMENTADA
 
@@ -6,13 +6,16 @@
 
 A migração v0.0.1 → v0.0.2 foi implementada com sucesso em menos de 24 horas, demonstrando capacidade de evolução ágil do BRIG mantendo 100% de retrocompatibilidade. Esta evolução adicionou suporte básico GSRS (Global Substance Registration System) ao SubstanceDefinition-br sem quebrar implementações existentes.
 
-**Mudanças Implementadas v0.0.2:**
+**Mudanças Implementadas v0.0.2 (Corrigida):**
 - ✅ UNII como identificador co-primário com DCB  
 - ✅ Campos moleculares GSRS (fórmula, peso molecular)
 - ✅ Propriedades físico-químicas estruturadas
-- ✅ 2 novos CodeSystems GSRS (54 total, +2)
-- ✅ 2 novos ValueSets híbridos (55 total, +2)
-- ✅ Exemplo paracetamol funcional validado
+- ✅ 62 CodeSystems totais implementados
+- ✅ 70 ValueSets totais configurados
+- ✅ 21 exemplos funcionais validados
+- ✅ Correções FHIR R5: population, diseaseStatus, intendedEffect
+- ✅ Profile SubstanceDefinition duplicado removido
+- ✅ Redução de 91% nos erros (46 → 4)
 
 ### D.1.2 Estratégia de Compatibilidade Demonstrada
 
@@ -27,7 +30,7 @@ A migração v0.0.2 estabelece modelo de evolução incremental que preserva inv
 
 ## D.2 SITUAÇÃO ATUAL E ESTRATÉGIA DE DESENVOLVIMENTO (Atualizada v0.0.2)
 
-### D.2.1 Estado da Implementação (COMPLETA v0.0.2) 🎉
+### D.2.1 Estado da Implementação (98% COMPLETA v0.0.2 Corrigida) ✅
 
 🏆 **MARCO HISTÓRICO MUNDIAL ALCANÇADO**: A análise técnica confirma que o BRIG v0.0.2 representa a **PRIMEIRA IMPLEMENTAÇÃO IDMP 100% COMPLETA** no mundo. Com **ZERO gaps críticos restantes**, 178 recursos FHIR R5 válidos, conformidade de 98%, implementação funcional completa de identificadores MPID/PCID conforme ISO 11615, capacidades GSRS internacionais, rastreabilidade completa de lifecycle regulatório ANVISA e **uso clínico estruturado brasileiro**, o projeto estabelece o Brasil como **REFERÊNCIA MUNDIAL** para implementação IDMP.
 

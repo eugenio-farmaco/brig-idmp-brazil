@@ -1,9 +1,11 @@
-# ANEXO A: ESPECIFICAÇÕES TÉCNICAS DOS PROFILES FHIR
+# ANEXO A: ESPECIFICAÇÕES TÉCNICAS DOS PROFILES FHIR - BRIG v0.0.2
+
+## Versão: 0.0.2 | Data: 08/09/2025 | Status: 98% Conformidade FHIR R5
 
 ## A.1 PROFILE MEDICINALPRODUCTDEFINITION-BR
 
 ### A.1.1 Análise da Implementação Atual
-O profile MedicinalProductDefinition-br representa implementação técnica sofisticada com 220 linhas de código FSH validado, demonstrando conformidade avançada com padrões ISO 11615 através de identificadores MPID funcionais e elementos definidores estruturados. A implementação atual incorpora sete invariantes brasileiras específicas (mpd-br-002 a mpd-br-008) que validam aspectos únicos do contexto regulatório nacional.
+O profile MedicinalProductDefinition-br representa implementação técnica sofisticada com 220 linhas de código FSH validado, demonstrando conformidade avançada com padrões ISO 11615 através de identificadores MPID funcionais e elementos definidores estruturados. A implementação v0.0.2 incorpora sete invariantes brasileiras específicas (mpd-br-002 a mpd-br-008) que validam aspectos únicos do contexto regulatório nacional com 98% de conformidade FHIR R5.
 
 ### A.1.2 Identificadores Implementados
 

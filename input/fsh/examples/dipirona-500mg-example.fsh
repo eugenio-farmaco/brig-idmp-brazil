@@ -14,7 +14,7 @@ Description: "Exemplo básico de produto medicinal Dipirona 500mg comprimido par
 * identifier[anvisaRegistration].system = "http://anvisa.gov.br/medicamentos/registro"
 * identifier[anvisaRegistration].value = "100000000001"
 
-* type = http://hl7.org/fhir/medicinal-product-type#MedicinalProduct
+* type = http://farmaco.maxapex.net/brig/fhir/CodeSystem/medicinal-product-type-br#medicamento "Medicamento"
 
 * domain = http://hl7.org/fhir/medicinal-product-domain#Human
 
@@ -22,19 +22,20 @@ Description: "Exemplo básico de produto medicinal Dipirona 500mg comprimido par
 
 * combinedPharmaceuticalDoseForm = http://hl7.org/fhir/administrable-dose-form#100000073664 "Tablet"
 
-* legalStatusOfSupply = http://hl7.org/fhir/legal-status-of-supply#100000072084 "Medicinal product subject to medical prescription"
+* legalStatusOfSupply = http://farmaco.maxapex.net/brig/fhir/CodeSystem/legal-status-supply-br#prescricao-medica "Prescrição Médica"
 
 * classification[+] = http://www.whocc.no/atc#N02BB02 "metamizole sodium"
 
-* name.productName = "Dipirona 500mg"
-* name.usage.country = urn:iso:std:iso:3166#BR
-* name.usage.jurisdiction = urn:iso:std:iso:3166#BR
-* name.usage.language = urn:ietf:bcp:47#pt-BR
+* name[commercialName].type = http://farmaco.maxapex.net/brig/fhir/CodeSystem/product-name-type-br#commercial
+* name[commercialName].productName = "Dipirona 500mg"
+* name[commercialName].usage.country = urn:iso:std:iso:3166#BR
+* name[commercialName].usage.language = urn:ietf:bcp:47#pt-BR
 
 // Rota de administração (obrigatório)
 * route[+] = http://hl7.org/fhir/route-codes#PO "Oral"
 
 // Status de marketing (obrigatório)
+* marketingStatus.country = urn:iso:std:iso:3166#BR
 * marketingStatus.status = http://hl7.org/fhir/publication-status#active
 * marketingStatus.dateRange.start = "2024-01-01"
 
